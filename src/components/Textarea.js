@@ -4,6 +4,7 @@ import React, { useState } from "react";
 
 export default function Textarea(props) {
   const hendleUPClicked = () => {
+    document.title=props.title
     setText(text.toUpperCase());
     if(props.mode==="dark")
       {
@@ -52,8 +53,6 @@ export default function Textarea(props) {
         "text copy to clipBoard " , "success"
       )
     }
-    
-   
   };
   const removeextraspaces = () => {
     let find = text.split(/[" "]+/)
@@ -85,12 +84,10 @@ export default function Textarea(props) {
     )
   }
   }
-
-
   const [text, setText] = useState("");
   return (
     <>
-      <div>
+      <div >
         <h1 className= {`text-${props.mode === 'dark' ? 'white' :'dark'}`}>{props.heading}</h1>
 
         <div className="form-group textarea" style={{backgroundColor:(props.mode==="dark" ? "rgb(8 35 62)" : "white" ), color:(props.mode==="light" ? "rgb(8 35 62)" : "white") }}>
@@ -135,7 +132,7 @@ export default function Textarea(props) {
       <div className="container">
         <h3 className= {`text-${props.mode === 'dark' ? 'white' :'dark'}`}>text summary </h3>
         <p className= {`text-${props.mode === 'dark' ? 'white' :'dark'}`}>
-          {text.split(" ").length} words and {text.length} characters
+          {text.split(" ").filter((element)=>{return element.length !== 0}).length} words and {text.split("").filter((element)=>{return element !== " "}).length} characters
         </p>
       </div>
       <div>
